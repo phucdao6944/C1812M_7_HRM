@@ -22,6 +22,7 @@ public class MainJframe extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.us = us;
         this.username.setText(us.getLast_name() + " " + us.getFirst_name());
+        Main.add(new JDashboard());
     }
     
     /**

@@ -5,6 +5,11 @@
  */
 package views;
 
+import entities.User;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import static views.FormLogin._usr;
+
 /**
  *
  * @author Queen
@@ -32,13 +37,13 @@ public class FormRegister extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         LabelUsernameRegister = new javax.swing.JLabel();
-        RegisterPasswordConfirm = new javax.swing.JTextField();
         LabelPasswordRegister = new javax.swing.JLabel();
         RegisterUsername = new javax.swing.JTextField();
         LabelPasswordConfirmRegister = new javax.swing.JLabel();
-        RegisterPassword = new javax.swing.JTextField();
         SubmitRegister = new javax.swing.JButton();
         SignInNow = new javax.swing.JLabel();
+        RegisterPassword = new javax.swing.JPasswordField();
+        RegisterPasswordConfirm = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(540, 600));
@@ -74,14 +79,6 @@ public class FormRegister extends javax.swing.JFrame {
         LabelUsernameRegister.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LabelUsernameRegister.setText("Username");
 
-        RegisterPasswordConfirm.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(153, 204, 255), java.awt.Color.white));
-        RegisterPasswordConfirm.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        RegisterPasswordConfirm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegisterPasswordConfirmActionPerformed(evt);
-            }
-        });
-
         LabelPasswordRegister.setFont(new java.awt.Font("Tahoma", 2, 16)); // NOI18N
         LabelPasswordRegister.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LabelPasswordRegister.setText("Password");
@@ -98,14 +95,6 @@ public class FormRegister extends javax.swing.JFrame {
         LabelPasswordConfirmRegister.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LabelPasswordConfirmRegister.setText("Password Confirm");
 
-        RegisterPassword.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(153, 204, 255), java.awt.Color.white));
-        RegisterPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        RegisterPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegisterPasswordActionPerformed(evt);
-            }
-        });
-
         SubmitRegister.setBackground(new java.awt.Color(102, 153, 255));
         SubmitRegister.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         SubmitRegister.setForeground(new java.awt.Color(255, 255, 255));
@@ -113,6 +102,11 @@ public class FormRegister extends javax.swing.JFrame {
         SubmitRegister.setAlignmentX(0.5F);
         SubmitRegister.setBorder(null);
         SubmitRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        SubmitRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SubmitRegisterMouseClicked(evt);
+            }
+        });
 
         SignInNow.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         SignInNow.setForeground(new java.awt.Color(102, 153, 255));
@@ -126,25 +120,29 @@ public class FormRegister extends javax.swing.JFrame {
             }
         });
 
+        RegisterPassword.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(153, 204, 255), java.awt.Color.white));
+
+        RegisterPasswordConfirm.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(102, 204, 255), java.awt.Color.white));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RegisterPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RegisterPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RegisterUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelPasswordRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelUsernameRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelPasswordConfirmRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(RegisterPasswordConfirm)
+                    .addComponent(RegisterPassword)
+                    .addComponent(RegisterUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                    .addComponent(LabelPasswordRegister, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelUsernameRegister, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(SubmitRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
-                        .addComponent(SignInNow)))
+                        .addComponent(SignInNow))
+                    .addComponent(LabelPasswordConfirmRegister, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -156,13 +154,13 @@ public class FormRegister extends javax.swing.JFrame {
                 .addComponent(RegisterUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(LabelPasswordRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(RegisterPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RegisterPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(LabelPasswordConfirmRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RegisterPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(RegisterPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(SubmitRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(SignInNow)
@@ -187,24 +185,59 @@ public class FormRegister extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RegisterPasswordConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterPasswordConfirmActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RegisterPasswordConfirmActionPerformed
-
-    private void RegisterPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RegisterPasswordActionPerformed
-
     private void RegisterUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_RegisterUsernameActionPerformed
 
     private void SignInNowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignInNowMouseClicked
-        if(this.isVisible()) {
-           this.setVisible(false);
-        } 
+        if (this.isVisible()) {
+            this.setVisible(false);
+        }
         new FormLogin().setVisible(true);
     }//GEN-LAST:event_SignInNowMouseClicked
+
+    private void SubmitRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitRegisterMouseClicked
+        if (!this.validateLogin()) {
+            User u = new User();
+            u.setEmail(RegisterUsername.getText());
+            u.setPassword(RegisterPassword.getText());
+            if (_usr.login(u).getEmail() != null) {
+                JOptionPane.showConfirmDialog(null,
+                        "Đăng nhập thành công!", "Login", JOptionPane.DEFAULT_OPTION);
+                this.setVisible(false);
+                new MainJframe(u).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không đúng!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_SubmitRegisterMouseClicked
+
+    public boolean validateLogin() {
+        StringBuilder errorText = new StringBuilder();
+
+        if (RegisterUsername.getText().length() == 0) {
+            errorText.append("Vui lòng nhập tên đăng nhập!\n");
+            RegisterUsername.setBackground(Color.ORANGE);
+        }
+
+        if (RegisterPassword.getText().length() == 0) {
+            errorText.append("Vui lòng nhập mật khẩu!\n");
+            RegisterPassword.setBackground(Color.ORANGE);
+        }
+        if (RegisterPassword.getText().length() != 0 && RegisterPasswordConfirm.getText().length() == 0) {
+            errorText.append("Vui lòng xác nhận mật khẩu!\n");
+            RegisterPasswordConfirm.setBackground(Color.ORANGE);
+        }
+        if ((RegisterPasswordConfirm.getText().length() != 0 && RegisterUsername.getText().length() != 0) && RegisterPasswordConfirm.getText() != RegisterPassword.getText()) {
+            errorText.append("Mật khẩu không trùng khớp!\n");
+        }
+        if (errorText.length() == 0) {
+            return false;
+        } else {
+            JOptionPane.showMessageDialog(null, errorText, "Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -245,8 +278,8 @@ public class FormRegister extends javax.swing.JFrame {
     private javax.swing.JLabel LabelPasswordConfirmRegister;
     private javax.swing.JLabel LabelPasswordRegister;
     private javax.swing.JLabel LabelUsernameRegister;
-    private javax.swing.JTextField RegisterPassword;
-    private javax.swing.JTextField RegisterPasswordConfirm;
+    private javax.swing.JPasswordField RegisterPassword;
+    private javax.swing.JPasswordField RegisterPasswordConfirm;
     private javax.swing.JTextField RegisterUsername;
     private javax.swing.JLabel SignInNow;
     private javax.swing.JButton SubmitRegister;

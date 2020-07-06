@@ -21,7 +21,7 @@ public class ConnectionDb {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             try {
-                return DriverManager.getConnection("jdbc:mysql://localhost:3306/HRM","root","");
+                return DriverManager.getConnection("jdbc:sqlserver://localhost\\QUEEN-PC\\QUEEN:1433;databaseName=HRM","sa","1234$");
             } catch (SQLException ex) {
                 Logger.getLogger(ConnectionDb.class.getName()).log(Level.SEVERE, null, ex);
             }

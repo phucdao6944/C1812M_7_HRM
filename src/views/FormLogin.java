@@ -7,6 +7,7 @@ package views;
 
 import entities.User;
 import java.awt.Color;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import models.UserDAO;
@@ -43,9 +44,9 @@ public class FormLogin extends javax.swing.JFrame {
         LabelUsername = new javax.swing.JLabel();
         LoginUsername = new javax.swing.JTextField();
         LabelPassword = new javax.swing.JLabel();
-        LoginPassword = new javax.swing.JTextField();
         SubmitLogin = new javax.swing.JButton();
         CreateOne = new javax.swing.JLabel();
+        LoginPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -87,9 +88,6 @@ public class FormLogin extends javax.swing.JFrame {
         LabelPassword.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LabelPassword.setText("Password");
 
-        LoginPassword.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(153, 204, 255), java.awt.Color.white));
-        LoginPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
         SubmitLogin.setBackground(new java.awt.Color(102, 153, 255));
         SubmitLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         SubmitLogin.setForeground(new java.awt.Color(255, 255, 255));
@@ -115,22 +113,24 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
 
+        LoginPassword.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(102, 204, 255), java.awt.Color.white));
+
         javax.swing.GroupLayout BodyLoginLayout = new javax.swing.GroupLayout(BodyLogin);
         BodyLogin.setLayout(BodyLoginLayout);
         BodyLoginLayout.setHorizontalGroup(
             BodyLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BodyLoginLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(BodyLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(BodyLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(LabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabelUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LoginUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LoginUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                     .addGroup(BodyLoginLayout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addGroup(BodyLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(CreateOne)
-                            .addComponent(SubmitLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(SubmitLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(LoginPassword))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         BodyLoginLayout.setVerticalGroup(
@@ -143,8 +143,8 @@ public class FormLogin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(LabelPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addComponent(LoginPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
                 .addComponent(SubmitLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(CreateOne)
@@ -198,8 +198,8 @@ public class FormLogin extends javax.swing.JFrame {
             errorText.append("Vui lòng nhập tên đăng nhập!\n");
             LoginUsername.setBackground(Color.ORANGE);
         }
-
-        if (LoginPassword.getText().length() == 0) {
+        
+        if (Arrays.toString(LoginPassword.getPassword()).length()== 0) {
             errorText.append("Vui lòng nhập mật khẩu!\n");
             LoginPassword.setBackground(Color.ORANGE);
         }
@@ -253,7 +253,7 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JPanel HeaderLogin;
     private javax.swing.JLabel LabelPassword;
     private javax.swing.JLabel LabelUsername;
-    private javax.swing.JTextField LoginPassword;
+    private javax.swing.JPasswordField LoginPassword;
     private javax.swing.JTextField LoginUsername;
     private javax.swing.JButton SubmitLogin;
     private javax.swing.JLabel jLabel1;

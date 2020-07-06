@@ -21,7 +21,7 @@ public class MainJframe extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.us = us;
-        this.username.setText(us.getUsername());
+        this.username.setText(us.getLast_name() + " " + us.getFirst_name());
     }
     
     /**
@@ -94,11 +94,11 @@ public class MainJframe extends javax.swing.JFrame {
         Main.setLayout(MainLayout);
         MainLayout.setHorizontalGroup(
             MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 734, Short.MAX_VALUE)
+            .addGap(0, 741, Short.MAX_VALUE)
         );
         MainLayout.setVerticalGroup(
             MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 540, Short.MAX_VALUE)
         );
 
         jMenu1.setText("File");

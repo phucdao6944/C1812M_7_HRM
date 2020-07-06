@@ -179,9 +179,9 @@ public class FormLogin extends javax.swing.JFrame {
     private void SubmitLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitLoginMouseClicked
         if (!this.validateLogin()) {
             User u = new User();
-            u.setUsername(LoginUsername.getText());
+            u.setEmail(LoginUsername.getText());
             u.setPassword(LoginPassword.getText());
-            if (_usr.login(u).getUsername() != null) {
+            if (_usr.login(u).getEmail()!= null) {
                 JOptionPane.showConfirmDialog(null,
                         "Đăng nhập thành công!", "Login", JOptionPane.DEFAULT_OPTION);
                 this.setVisible(false);

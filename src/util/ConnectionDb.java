@@ -19,7 +19,7 @@ public class ConnectionDb {
 
     public static Connection getConnect() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             try {
                 return DriverManager.getConnection("jdbc:mysql://localhost:3306/HRM","root","");
             } catch (SQLException ex) {

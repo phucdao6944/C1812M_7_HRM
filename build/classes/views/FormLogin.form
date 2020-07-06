@@ -180,9 +180,6 @@
               <Color id="Text Cursor"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="LoginPasswordActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="SubmitLogin">
           <Properties>
@@ -204,6 +201,9 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SubmitLoginMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="CreateOne">
           <Properties>

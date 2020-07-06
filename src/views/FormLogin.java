@@ -5,7 +5,11 @@
  */
 package views;
 
+import entities.User;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import models.UserDAO;
 
 /**
  *
@@ -13,12 +17,15 @@ import javax.swing.JTextField;
  */
 public class FormLogin extends javax.swing.JFrame {
 
+    static UserDAO _usr;
+
     /**
      * Creates new form FormLogin
      */
     public FormLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        _usr = new UserDAO();
     }
 
     /**
@@ -82,11 +89,6 @@ public class FormLogin extends javax.swing.JFrame {
 
         LoginPassword.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(153, 204, 255), java.awt.Color.white));
         LoginPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        LoginPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginPasswordActionPerformed(evt);
-            }
-        });
 
         SubmitLogin.setBackground(new java.awt.Color(102, 153, 255));
         SubmitLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -95,6 +97,11 @@ public class FormLogin extends javax.swing.JFrame {
         SubmitLogin.setAlignmentX(0.5F);
         SubmitLogin.setBorder(null);
         SubmitLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        SubmitLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SubmitLoginMouseClicked(evt);
+            }
+        });
 
         CreateOne.setBackground(new java.awt.Color(102, 153, 255));
         CreateOne.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -162,16 +169,48 @@ public class FormLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LoginPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LoginPasswordActionPerformed
-
     private void CreateOneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreateOneMouseClicked
-        if(this.isVisible()) {
-           this.setVisible(false);
-        } 
+        if (this.isVisible()) {
+            this.setVisible(false);
+        }
         new FormRegister().setVisible(true);
     }//GEN-LAST:event_CreateOneMouseClicked
+
+    private void SubmitLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitLoginMouseClicked
+        if (!this.validateLogin()) {
+            User u = new User();
+            u.setUsername(LoginUsername.getText());
+            u.setPassword(LoginPassword.getText());
+            if (_usr.login(u).getUsername() != null) {
+                JOptionPane.showConfirmDialog(null,
+                        "Đăng nhập thành công!", "Login", JOptionPane.DEFAULT_OPTION);
+                this.setVisible(false);
+                new MainJframe(u).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không đúng!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_SubmitLoginMouseClicked
+    public boolean validateLogin() {
+        StringBuilder errorText = new StringBuilder();
+
+        if (LoginUsername.getText().length() == 0) {
+            errorText.append("Vui lòng nhập tên đăng nhập!\n");
+            LoginUsername.setBackground(Color.ORANGE);
+        }
+
+        if (LoginPassword.getText().length() == 0) {
+            errorText.append("Vui lòng nhập mật khẩu!\n");
+            LoginPassword.setBackground(Color.ORANGE);
+        }
+
+        if (errorText.length() == 0) {
+            return false;
+        } else {
+            JOptionPane.showMessageDialog(null, errorText, "Error", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+    }
 
     /**
      * @param args the command line arguments

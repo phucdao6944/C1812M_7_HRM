@@ -17,6 +17,7 @@ public class JDashboard extends javax.swing.JInternalFrame {
     public JDashboard() {
         initComponents();
         this.setSize(this.getMaximumSize());
+        setVisible(true);
     }
 
     /**

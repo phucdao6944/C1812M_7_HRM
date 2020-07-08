@@ -27,13 +27,13 @@ public class UserDAO implements IDbHandler<User, Integer>{
     public User login(User us) {
         try {
             User u = new User();
-            PreparedStatement stm = conn.prepareStatement("select * from users where username = ? and password = ? limit 1");
+            PreparedStatement stm = conn.prepareStatement("select top 1 * from users where email = ? and password = ?");
             stm.setObject(1, us.getEmail());
             stm.setObject(2, us.getPassword());
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 u.setId(rs.getInt("id"));
-                u.setEmail(rs.getString("username"));
+                u.setEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
                 u.setFirst_name(rs.getString("first_name"));
                 u.setLast_name(rs.getString("last_name"));

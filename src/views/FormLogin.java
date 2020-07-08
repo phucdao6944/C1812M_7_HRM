@@ -185,7 +185,7 @@ public class FormLogin extends javax.swing.JFrame {
                 JOptionPane.showConfirmDialog(null,
                         "Đăng nhập thành công!", "Login", JOptionPane.DEFAULT_OPTION);
                 this.setVisible(false);
-                new MainJframe(u).setVisible(true);
+                new MainJframe(_usr.login(u)).setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không đúng!", "Error", JOptionPane.ERROR_MESSAGE);
             }

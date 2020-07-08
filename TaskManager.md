@@ -1,5 +1,7 @@
 
-Đào Vĩnh Bảo Phúc(Nhóm trưởng)
+- Thông tin về các bảng của dự án: documents/project_table.docx
+- Export DB: documents/script.sql
+- Đào Vĩnh Bảo Phúc(Nhóm trưởng)
 - Chấm công
 - Thống kê tiền lương
 - Mở rộng: Bảo Hiểm - Trợ Cấp

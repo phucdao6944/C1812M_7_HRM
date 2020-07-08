@@ -4,11 +4,11 @@ Chấm công
 Thống kê tiền lương
 Mở rộng: Bảo Hiểm - Trợ Cấp
 1/7/2020
-
+Thiết kế DB
 3/7/2020
-
+Thiết kế DB
 6/7/2020
-
+- Thiết kế DB, và thiết kế khung cơ bản của dự án.
 8/7/2020
 
 10/7/2020
@@ -25,9 +25,9 @@ Mở rộng: Bảo Hiểm - Trợ Cấp
 
 
 Đỗ Ngọc Lâm
-Thông tin người dùng
-Phòng ban và vị trí
-Danh sách nhân sự
+- Thông tin người dùng
+- Phòng ban và vị trí
+- Danh sách nhân sự
 1/7/2020
 
 3/7/2020

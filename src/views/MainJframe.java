@@ -60,10 +60,10 @@ public class MainJframe extends javax.swing.JFrame {
         MenuBar = new javax.swing.JPanel();
         BtnProfile = new javax.swing.JButton();
         BtnDepartment = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        BtnHR = new javax.swing.JButton();
+        BtnLogWork = new javax.swing.JButton();
+        BtnSalary = new javax.swing.JButton();
+        BtnExtend = new javax.swing.JButton();
         Main = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -146,62 +146,82 @@ public class MainJframe extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(51, 153, 255));
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-user-account-24.png"))); // NOI18N
-        jButton3.setText("Danh sách nhân sự");
-        jButton3.setBorder(null);
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BtnHR.setBackground(new java.awt.Color(51, 153, 255));
+        BtnHR.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        BtnHR.setForeground(new java.awt.Color(255, 255, 255));
+        BtnHR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-user-account-24.png"))); // NOI18N
+        BtnHR.setText("Danh sách nhân sự");
+        BtnHR.setBorder(null);
+        BtnHR.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnHR.setFocusable(false);
+        BtnHR.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnHR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnHRMouseClicked(evt);
+            }
+        });
+        BtnHR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BtnHRActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(51, 153, 255));
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-log-24.png"))); // NOI18N
-        jButton4.setText("Chấm công");
-        jButton4.setBorder(null);
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        BtnLogWork.setBackground(new java.awt.Color(51, 153, 255));
+        BtnLogWork.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        BtnLogWork.setForeground(new java.awt.Color(255, 255, 255));
+        BtnLogWork.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-log-24.png"))); // NOI18N
+        BtnLogWork.setText("Chấm công");
+        BtnLogWork.setBorder(null);
+        BtnLogWork.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnLogWork.setFocusable(false);
+        BtnLogWork.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnLogWork.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnLogWorkMouseClicked(evt);
+            }
+        });
+        BtnLogWork.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                BtnLogWorkActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(51, 153, 255));
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-salary-male-24.png"))); // NOI18N
-        jButton5.setText("Thông kê tiền lương");
-        jButton5.setBorder(null);
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        BtnSalary.setBackground(new java.awt.Color(51, 153, 255));
+        BtnSalary.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        BtnSalary.setForeground(new java.awt.Color(255, 255, 255));
+        BtnSalary.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-salary-male-24.png"))); // NOI18N
+        BtnSalary.setText("Thông kê tiền lương");
+        BtnSalary.setBorder(null);
+        BtnSalary.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnSalary.setFocusable(false);
+        BtnSalary.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnSalary.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnSalaryMouseClicked(evt);
+            }
+        });
+        BtnSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                BtnSalaryActionPerformed(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(51, 153, 255));
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-zoom-out-24.png"))); // NOI18N
-        jButton6.setText("Mở rộng");
-        jButton6.setBorder(null);
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton6.setFocusable(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        BtnExtend.setBackground(new java.awt.Color(51, 153, 255));
+        BtnExtend.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        BtnExtend.setForeground(new java.awt.Color(255, 255, 255));
+        BtnExtend.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-zoom-out-24.png"))); // NOI18N
+        BtnExtend.setText("Mở rộng");
+        BtnExtend.setBorder(null);
+        BtnExtend.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnExtend.setFocusable(false);
+        BtnExtend.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnExtendMouseClicked(evt);
+            }
+        });
+        BtnExtend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                BtnExtendActionPerformed(evt);
             }
         });
 
@@ -211,10 +231,10 @@ public class MainJframe extends javax.swing.JFrame {
             MenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(BtnProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BtnDepartment, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+            .addComponent(BtnHR, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+            .addComponent(BtnLogWork, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+            .addComponent(BtnSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+            .addComponent(BtnExtend, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
         );
         MenuBarLayout.setVerticalGroup(
             MenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,13 +243,13 @@ public class MainJframe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnHR, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnLogWork, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(BtnExtend, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jMenu1.setText("File");
@@ -276,35 +296,104 @@ public class MainJframe extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnDepartmentActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void BtnHRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHRActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_BtnHRActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void BtnLogWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogWorkActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_BtnLogWorkActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void BtnSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalaryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_BtnSalaryActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void BtnExtendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExtendActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_BtnExtendActionPerformed
 
     private void BtnProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnProfileMouseClicked
-        JPanel tab1 = new JPanel(new BorderLayout());
-        JInternalFrame fd = new JProfile();
-        tab1.add(fd.getContentPane());
-        Main.addTab("Profile", tab1);
+        int i = checkExistTab("Profile");
+        if (i < 0) {
+            JPanel tab1 = new JPanel(new BorderLayout());
+            JInternalFrame fd = new JProfile();
+            tab1.add(fd.getContentPane());
+            Main.addTab("Profile", tab1);
+        }else{
+            Main.setSelectedIndex(i);
+        }
     }//GEN-LAST:event_BtnProfileMouseClicked
 
+    public int checkExistTab(String tabName) {
+        int totalTab = Main.getTabCount();
+        int check = -1;
+        for (int i = 0; i < totalTab; i++) {
+            if (Main.getTitleAt(i).equals(tabName)) {
+                check = i;
+            }
+        }
+        return check;
+    }
+
     private void BtnDepartmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDepartmentMouseClicked
-        JPanel tab2 = new JPanel(new BorderLayout());
-        JInternalFrame fd = new JDepartment();
-        tab2.add(fd.getContentPane());
-        Main.addTab("Department", tab2);
+        int i = checkExistTab("Department");
+        if (i < 0) {
+            JPanel tab2 = new JPanel(new BorderLayout());
+            JInternalFrame fd = new JDepartment();
+            tab2.add(fd.getContentPane());
+            Main.addTab("Department", tab2);
+        }else{
+            Main.setSelectedIndex(i);
+        }
     }//GEN-LAST:event_BtnDepartmentMouseClicked
+
+    private void BtnHRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHRMouseClicked
+        int i = checkExistTab("Humam Resource");
+        if (i < 0) {
+            JPanel tab3 = new JPanel(new BorderLayout());
+            JInternalFrame fd = new JHumanResource();
+            tab3.add(fd.getContentPane());
+            Main.addTab("Humam Resource", tab3);
+        }else{
+            Main.setSelectedIndex(i);
+        }
+    }//GEN-LAST:event_BtnHRMouseClicked
+
+    private void BtnLogWorkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLogWorkMouseClicked
+        int i = checkExistTab("Log Work");
+        if (i < 0) {
+            JPanel tab4 = new JPanel(new BorderLayout());
+            JInternalFrame fd = new JLogWork();
+            tab4.add(fd.getContentPane());
+            Main.addTab("Log Work", tab4);
+        }else{
+            Main.setSelectedIndex(i);
+        }
+    }//GEN-LAST:event_BtnLogWorkMouseClicked
+
+    private void BtnSalaryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSalaryMouseClicked
+        int i = checkExistTab("Salary");
+        if (i < 0) {
+            JPanel tab5 = new JPanel(new BorderLayout());
+            JInternalFrame fd = new JSalary();
+            tab5.add(fd.getContentPane());
+            Main.addTab("Salary", tab5);
+        }else{
+            Main.setSelectedIndex(i);
+        }
+    }//GEN-LAST:event_BtnSalaryMouseClicked
+
+    private void BtnExtendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnExtendMouseClicked
+        int i = checkExistTab("Extends");
+        if (i < 0) {
+            JPanel tab6 = new JPanel(new BorderLayout());
+            JInternalFrame fd = new JExtend();
+            tab6.add(fd.getContentPane());
+            Main.addTab("Extends", tab6);
+        }else{
+            Main.setSelectedIndex(i);
+        }
+    }//GEN-LAST:event_BtnExtendMouseClicked
 
     /**
      * @param args the command line arguments
@@ -343,15 +432,15 @@ public class MainJframe extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnDepartment;
+    private javax.swing.JButton BtnExtend;
+    private javax.swing.JButton BtnHR;
+    private javax.swing.JButton BtnLogWork;
     private javax.swing.JButton BtnProfile;
+    private javax.swing.JButton BtnSalary;
     private javax.swing.JPanel HeaderMain;
     private javax.swing.JLabel Logout;
     private javax.swing.JTabbedPane Main;
     private javax.swing.JPanel MenuBar;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

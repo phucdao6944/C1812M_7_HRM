@@ -6,11 +6,16 @@
 package views;
 
 import entities.User;
+import java.awt.BorderLayout;
+import java.awt.Insets;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -53,13 +58,13 @@ public class MainJframe extends javax.swing.JFrame {
         username = new javax.swing.JLabel();
         Logout = new javax.swing.JLabel();
         MenuBar = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BtnProfile = new javax.swing.JButton();
+        BtnDepartment = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        Main = new javax.swing.JPanel();
+        Main = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -101,33 +106,43 @@ public class MainJframe extends javax.swing.JFrame {
 
         MenuBar.setBackground(new java.awt.Color(102, 255, 255));
 
-        jButton1.setBackground(new java.awt.Color(51, 153, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-admin-settings-male-24.png"))); // NOI18N
-        jButton1.setText("Thông tin tài khoản");
-        jButton1.setBorder(null);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnProfile.setBackground(new java.awt.Color(51, 153, 255));
+        BtnProfile.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        BtnProfile.setForeground(new java.awt.Color(255, 255, 255));
+        BtnProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-admin-settings-male-24.png"))); // NOI18N
+        BtnProfile.setText("Thông tin tài khoản");
+        BtnProfile.setBorder(null);
+        BtnProfile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnProfile.setFocusable(false);
+        BtnProfile.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnProfileMouseClicked(evt);
+            }
+        });
+        BtnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnProfileActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(51, 153, 255));
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-department-24.png"))); // NOI18N
-        jButton2.setText("Phòng ban và vị trí");
-        jButton2.setBorder(null);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnDepartment.setBackground(new java.awt.Color(51, 153, 255));
+        BtnDepartment.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        BtnDepartment.setForeground(new java.awt.Color(255, 255, 255));
+        BtnDepartment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-department-24.png"))); // NOI18N
+        BtnDepartment.setText("Phòng ban và vị trí");
+        BtnDepartment.setBorder(null);
+        BtnDepartment.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnDepartment.setFocusable(false);
+        BtnDepartment.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnDepartment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnDepartmentMouseClicked(evt);
+            }
+        });
+        BtnDepartment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnDepartmentActionPerformed(evt);
             }
         });
 
@@ -194,8 +209,8 @@ public class MainJframe extends javax.swing.JFrame {
         MenuBar.setLayout(MenuBarLayout);
         MenuBarLayout.setHorizontalGroup(
             MenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+            .addComponent(BtnProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(BtnDepartment, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
@@ -204,9 +219,9 @@ public class MainJframe extends javax.swing.JFrame {
         MenuBarLayout.setVerticalGroup(
             MenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuBarLayout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -215,17 +230,6 @@ public class MainJframe extends javax.swing.JFrame {
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        javax.swing.GroupLayout MainLayout = new javax.swing.GroupLayout(Main);
-        Main.setLayout(MainLayout);
-        MainLayout.setHorizontalGroup(
-            MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 997, Short.MAX_VALUE)
-        );
-        MainLayout.setVerticalGroup(
-            MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jMenu1.setText("File");
@@ -244,7 +248,7 @@ public class MainJframe extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(MenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Main, javax.swing.GroupLayout.DEFAULT_SIZE, 997, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +257,7 @@ public class MainJframe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(MenuBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(Main)))
         );
 
         pack();
@@ -264,13 +268,13 @@ public class MainJframe extends javax.swing.JFrame {
         new FormLogin().setVisible(true);
     }//GEN-LAST:event_LogoutMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnProfileActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnProfileActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BtnDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDepartmentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BtnDepartmentActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -287,6 +291,20 @@ public class MainJframe extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void BtnProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnProfileMouseClicked
+        JPanel tab1 = new JPanel(new BorderLayout());
+        JInternalFrame fd = new JProfile();
+        tab1.add(fd.getContentPane());
+        Main.addTab("Profile", tab1);
+    }//GEN-LAST:event_BtnProfileMouseClicked
+
+    private void BtnDepartmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDepartmentMouseClicked
+        JPanel tab2 = new JPanel(new BorderLayout());
+        JInternalFrame fd = new JDepartment();
+        tab2.add(fd.getContentPane());
+        Main.addTab("Department", tab2);
+    }//GEN-LAST:event_BtnDepartmentMouseClicked
 
     /**
      * @param args the command line arguments
@@ -324,12 +342,12 @@ public class MainJframe extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnDepartment;
+    private javax.swing.JButton BtnProfile;
     private javax.swing.JPanel HeaderMain;
     private javax.swing.JLabel Logout;
-    private javax.swing.JPanel Main;
+    private javax.swing.JTabbedPane Main;
     private javax.swing.JPanel MenuBar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

@@ -11,8 +11,8 @@
 - Thiết kế DB
 - 6/7/2020
 - Thiết kế DB, và thiết kế khung cơ bản của dự án.
--8/7/2020
-- 
+- 8/7/2020
+- Viết phần thêm chấm công.
 - 10/7/2020
 - 
 - 13/7/2020
@@ -35,7 +35,7 @@
 - 3/7/2020
 - 
 - 6/7/2020
-- 
+- Viết phần login.
 - 8/7/2020
 - Xong login, và tạo khung nền các chức năng.
 - 10/7/2020

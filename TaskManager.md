@@ -31,9 +31,9 @@
 - Phòng ban và vị trí
 - Danh sách nhân sự
 - 1/7/2020
-- 
+- Design parttern
 - 3/7/2020
-- 
+- Viết các class cơ bản
 - 6/7/2020
 - Viết phần login.
 - 8/7/2020

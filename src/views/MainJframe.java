@@ -363,7 +363,7 @@ public class MainJframe extends javax.swing.JFrame {
         int i = checkExistTab("Log Work");
         if (i < 0) {
             JPanel tab4 = new JPanel(new BorderLayout());
-            JInternalFrame fd = new JLogWork();
+            JInternalFrame fd = new JLogWork(this.us);
             tab4.add(fd.getContentPane());
             Main.addTab("Log Work", tab4);
         }else{

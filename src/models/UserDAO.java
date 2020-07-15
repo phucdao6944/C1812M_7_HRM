@@ -70,4 +70,5 @@ public class UserDAO implements IDbHandler<User, Integer>{
     public User getById(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

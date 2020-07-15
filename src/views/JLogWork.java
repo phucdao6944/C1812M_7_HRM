@@ -5,17 +5,102 @@
  */
 package views;
 
+import entities.LogWork;
+import entities.User;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.JOptionPane;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import models.LogWorkDao;
+
 /**
  *
  * @author Queen
  */
 public class JLogWork extends javax.swing.JInternalFrame {
 
+    private final User us;
+
     /**
      * Creates new form JLogWork
+     *
+     * @param us
      */
-    public JLogWork() {
+    public JLogWork(User us) {
+        this.us = us;
         initComponents();
+        this.loadLog();
+        totalDayWorking.setText("Tổng số ngày làm việc trong tháng: " + getTotalDayWorking() + " ngày");
+    }
+
+    public Date getLastDayOfMonth() {
+        Date today = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+
+        calendar.add(Calendar.MONTH, 1);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.add(Calendar.DATE, -1);
+        Date lastDayOfMonth = calendar.getTime();
+        return lastDayOfMonth;
+    }
+
+    public Date getFirstDayOfMonth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        Date startDayOfMonth = calendar.getTime();
+        return startDayOfMonth;
+    }
+    
+    public int getTotalDaysOfMonth(){
+        Date today = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        return maxDay;
+    }
+
+    public void loadLog() {
+        List<LogWork> logWorks = new ArrayList<LogWork>();
+        DefaultTableModel model = (DefaultTableModel) log_work_table.getModel();
+        model.setRowCount(0);
+        LogWorkDao lWDao = new LogWorkDao();
+        logWorks = lWDao.getByUser(us.getId());
+        logWorks.forEach(logWork -> {
+            if (logWork.getEndDate() != null) {
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date startDate = sdf.parse(logWork.getStartDate());
+                    Date endDate = sdf.parse(logWork.getEndDate());
+                    long diff = endDate.getTime() - startDate.getTime();
+                    int diffhours = (int) (diff / (60 * 60 * 1000));
+                    model.addRow(new Object[]{
+                        logWork.getId(),
+                        logWork.getCreatedAt(),
+                        logWork.getComment(),
+                        diffhours
+                    }
+                    );
+                } catch (ParseException ex) {
+                    Logger.getLogger(JLogWork.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                model.addRow(new Object[]{
+                    logWork.getId(),
+                    logWork.getCreatedAt(),
+                    logWork.getComment(),
+                    null
+                }
+                );
+            }
+        });
     }
 
     /**
@@ -27,32 +112,143 @@ public class JLogWork extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        log_work_table = new javax.swing.JTable();
+        rollUp = new javax.swing.JButton();
+        totalDayWorking = new javax.swing.JLabel();
 
-        jLabel1.setText("Logwork");
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        log_work_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Ngày", "Ghi chú", "Tổng số giờ"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        log_work_table.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                log_work_tablePropertyChange(evt);
+            }
+        });
+        jScrollPane2.setViewportView(log_work_table);
+
+        rollUp.setText("Điểm danh");
+        rollUp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rollUpMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(153, 153, 153)
-                .addComponent(jLabel1)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(rollUp))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(totalDayWorking, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(jLabel1)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addComponent(rollUp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(totalDayWorking, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rollUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rollUpMouseClicked
+        List<LogWork> logWorks = new ArrayList<LogWork>();
+        LogWorkDao lWDao = new LogWorkDao();
+        java.util.Date currentDate = (java.util.Date) new Date(System.currentTimeMillis());
+        logWorks = lWDao.getByCreatedAt(currentDate, currentDate);
+        if (logWorks.isEmpty()) {
+            String str = JOptionPane.showInputDialog(jScrollPane2, "Thêm ghi chú:", "Điểm danh đầu ngày", JOptionPane.YES_NO_OPTION);
+            if (str != null) {
+                LogWork nlw = new LogWork();
+                nlw.setComment(str);
+                nlw.setUserId(us.getId());
+                lWDao.insert(nlw);
+                this.loadLog();
+            }
+        } else {
+            LogWork lw = logWorks.get(0);
+            if (lw.getEndDate() != null) {
+                JOptionPane.showMessageDialog(jScrollPane2, "Hôm nay đã báo cáo");
+            } else {
+                String str = JOptionPane.showInputDialog(jScrollPane2, "Thêm ghi chú:", "Điểm danh cuối ngày", JOptionPane.YES_NO_OPTION);
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String endDate = formatter.format(currentDate);
+                lw.setEndDate(endDate);
+                if (str != null && str.length() > 0) {
+                    lw.setComment(str);
+                }
+                lWDao.updateEndDate(lw);
+                this.loadLog();
+            }
+        }
+
+    }//GEN-LAST:event_rollUpMouseClicked
+
+    private void log_work_tablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_log_work_tablePropertyChange
+        LogWorkDao lWDao = new LogWorkDao();
+        DefaultTableModel model = (DefaultTableModel) log_work_table.getModel();
+        if (evt.getOldValue() != null && evt.getOldValue().toString().contains("JTable$GenericEditor")) {
+            int selectedRowIndex = log_work_table.getSelectedRow();
+            LogWork lw = new LogWork();
+            lw.setComment(model.getValueAt(selectedRowIndex, 2).toString());
+            lw.setId((int) model.getValueAt(selectedRowIndex, 0));
+            lWDao.update(lw);
+            this.loadLog();
+        }
+    }//GEN-LAST:event_log_work_tablePropertyChange
+    
+    private String getTotalDayWorking(){
+        List<LogWork> logWorks = new ArrayList<LogWork>();
+        LogWorkDao lWDao = new LogWorkDao();
+        Date lastDate = getLastDayOfMonth();
+        Date firstDate = getFirstDayOfMonth();
+        logWorks = lWDao.getByCreatedAt(firstDate, lastDate);
+        String totalWorking = logWorks.size() + "/" + getTotalDaysOfMonth();
+        return totalWorking;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable log_work_table;
+    private javax.swing.JButton rollUp;
+    private javax.swing.JLabel totalDayWorking;
     // End of variables declaration//GEN-END:variables
 }

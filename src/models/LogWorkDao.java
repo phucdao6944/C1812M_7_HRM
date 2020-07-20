@@ -72,17 +72,16 @@ public class LogWorkDao implements IDbHandler<LogWork, Integer> {
         return false;
     }
 
-    public boolean update(LogWork entity) {
+    @Override
+    public void update(LogWork entity) {
         try {
             PreparedStatement stm = conn.prepareStatement("UPDATE log_times SET comment = ? where id = ? ");
             stm.setObject(1, entity.getComment());
             stm.setObject(2, entity.getId());
             stm.execute();
-            return true;
         } catch (SQLException ex) {
             Logger.getLogger(LogWorkDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
     }
     
     public Date getLastDayOfMonth() {

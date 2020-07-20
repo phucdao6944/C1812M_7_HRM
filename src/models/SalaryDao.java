@@ -114,5 +114,10 @@ public class SalaryDao implements IDbHandler<Salary, Integer>{
     public Salary getById(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void update(Salary entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

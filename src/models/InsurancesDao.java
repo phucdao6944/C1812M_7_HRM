@@ -80,7 +80,8 @@ public class InsurancesDao implements IDbHandler<Insurances, Integer>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public boolean update(Insurances ins){
+    @Override
+    public void update(Insurances ins){
         PreparedStatement stm;
         try {
             stm = conn.prepareStatement("Update insurances set name = ?, amount = ?, comment = ? where id = ?");
@@ -89,10 +90,8 @@ public class InsurancesDao implements IDbHandler<Insurances, Integer>{
             stm.setObject(3, ins.getComment());
             stm.setObject(4, ins.getId());
             stm.execute();
-            return true;
         } catch (SQLException ex) {
             Logger.getLogger(InsurancesDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
     }
 }

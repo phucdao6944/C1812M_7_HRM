@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -83,17 +84,51 @@ public class LogWorkDao implements IDbHandler<LogWork, Integer> {
         }
         return false;
     }
+    
+    public Date getLastDayOfMonth() {
+        Date today = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
 
-    public List<LogWork> getByCreatedAt(Date createdAtStart, Date createdAtEnd) {
+        calendar.add(Calendar.MONTH, 1);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.add(Calendar.DATE, -1);
+        Date lastDayOfMonth = calendar.getTime();
+        return lastDayOfMonth;
+    }
+
+    public Date getFirstDayOfMonth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        Date startDayOfMonth = calendar.getTime();
+        return startDayOfMonth;
+    }
+    
+    public int getTotalDaysOfMonth(){
+        Date today = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        return maxDay;
+    }
+    
+    public List<LogWork> getByCreatedAt(Date createdAtStart, Date createdAtEnd, int userId) {
         List<LogWork> logWorks = new ArrayList<LogWork>();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         PreparedStatement stm;
         String startCreatedAt = formatter.format(createdAtStart) + " 00:00:00";
         String endCreatedAt = formatter.format(createdAtEnd) + " 23:59:59";
         try {
-            stm = conn.prepareStatement("SELECT * FROM log_times where created_at BETWEEN ? AND ?");
+            String query = "SELECT * FROM log_times where (created_at BETWEEN ? AND ?)";
+            if (userId > 0) {
+                query += " and user_id = ?";
+            }
+            stm = conn.prepareStatement(query);
             stm.setObject(1, startCreatedAt);
             stm.setObject(2, endCreatedAt);
+            if (userId > 0) {
+                stm.setObject(3, userId);
+            }
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 LogWork lw = new LogWork();

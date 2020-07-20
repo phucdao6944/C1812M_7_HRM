@@ -375,7 +375,7 @@ public class MainJframe extends javax.swing.JFrame {
         int i = checkExistTab("Salary");
         if (i < 0) {
             JPanel tab5 = new JPanel(new BorderLayout());
-            JInternalFrame fd = new JSalary();
+            JInternalFrame fd = new JSalary(this.us);
             tab5.add(fd.getContentPane());
             Main.addTab("Salary", tab5);
         }else{

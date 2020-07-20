@@ -39,33 +39,6 @@ public class JLogWork extends javax.swing.JInternalFrame {
         totalDayWorking.setText("Tổng số ngày làm việc trong tháng: " + getTotalDayWorking() + " ngày");
     }
 
-    public Date getLastDayOfMonth() {
-        Date today = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(today);
-
-        calendar.add(Calendar.MONTH, 1);
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        calendar.add(Calendar.DATE, -1);
-        Date lastDayOfMonth = calendar.getTime();
-        return lastDayOfMonth;
-    }
-
-    public Date getFirstDayOfMonth() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        Date startDayOfMonth = calendar.getTime();
-        return startDayOfMonth;
-    }
-    
-    public int getTotalDaysOfMonth(){
-        Date today = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(today);
-        int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        return maxDay;
-    }
-
     public void loadLog() {
         List<LogWork> logWorks = new ArrayList<LogWork>();
         DefaultTableModel model = (DefaultTableModel) log_work_table.getModel();
@@ -191,7 +164,7 @@ public class JLogWork extends javax.swing.JInternalFrame {
         List<LogWork> logWorks = new ArrayList<LogWork>();
         LogWorkDao lWDao = new LogWorkDao();
         java.util.Date currentDate = (java.util.Date) new Date(System.currentTimeMillis());
-        logWorks = lWDao.getByCreatedAt(currentDate, currentDate);
+        logWorks = lWDao.getByCreatedAt(currentDate, currentDate, us.getId());
         if (logWorks.isEmpty()) {
             String str = JOptionPane.showInputDialog(jScrollPane2, "Thêm ghi chú:", "Điểm danh đầu ngày", JOptionPane.YES_NO_OPTION);
             if (str != null) {
@@ -236,10 +209,10 @@ public class JLogWork extends javax.swing.JInternalFrame {
     private String getTotalDayWorking(){
         List<LogWork> logWorks = new ArrayList<LogWork>();
         LogWorkDao lWDao = new LogWorkDao();
-        Date lastDate = getLastDayOfMonth();
-        Date firstDate = getFirstDayOfMonth();
-        logWorks = lWDao.getByCreatedAt(firstDate, lastDate);
-        String totalWorking = logWorks.size() + "/" + getTotalDaysOfMonth();
+        Date lastDate = lWDao.getLastDayOfMonth();
+        Date firstDate = lWDao.getFirstDayOfMonth();
+        logWorks = lWDao.getByCreatedAt(firstDate, lastDate, us.getId());
+        String totalWorking = logWorks.size() + "/" + lWDao.getTotalDaysOfMonth();
         return totalWorking;
     }
 

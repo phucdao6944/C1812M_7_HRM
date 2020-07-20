@@ -33,18 +33,16 @@ public class MainJframe extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.us = us;
         this.username.setText(us.getLast_name() + " " + us.getFirst_name());
-//        JDashboard jf = new JDashboard();
-//        jf.setVisible(true);
-//        Main.add(jf);
-//        try {
-//            jf.setSelected(true);
-//        } catch (PropertyVetoException ex) {
-//            Logger.getLogger(MainJframe.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        setContentPane(Main);
-//        Main.getRootPane().add(this)
     }
 
+    public void setUser(User user){
+        this.us = user;
+        setUsername(this.us.getLast_name() + " " + this.us.getFirst_name());
+    }
+    
+    private void setUsername(String name){
+        this.username.setText(name);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,6 +68,7 @@ public class MainJframe extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
 
         HeaderMain.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -100,7 +99,7 @@ public class MainJframe extends javax.swing.JFrame {
         HeaderMainLayout.setVerticalGroup(
             HeaderMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(username, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(username, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
                 .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -248,7 +247,7 @@ public class MainJframe extends javax.swing.JFrame {
                 .addComponent(BtnLogWork, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                 .addComponent(BtnExtend, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -268,14 +267,14 @@ public class MainJframe extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(MenuBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Main, javax.swing.GroupLayout.DEFAULT_SIZE, 997, Short.MAX_VALUE))
+                .addComponent(Main, javax.swing.GroupLayout.DEFAULT_SIZE, 1123, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(HeaderMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(MenuBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Main)))
         );
@@ -316,10 +315,10 @@ public class MainJframe extends javax.swing.JFrame {
         int i = checkExistTab("Profile");
         if (i < 0) {
             JPanel tab1 = new JPanel(new BorderLayout());
-            JInternalFrame fd = new JProfile();
+            JInternalFrame fd = new JProfile(this.us, this);
             tab1.add(fd.getContentPane());
             Main.addTab("Profile", tab1);
-        }else{
+        } else {
             Main.setSelectedIndex(i);
         }
     }//GEN-LAST:event_BtnProfileMouseClicked
@@ -342,7 +341,7 @@ public class MainJframe extends javax.swing.JFrame {
             JInternalFrame fd = new JDepartment();
             tab2.add(fd.getContentPane());
             Main.addTab("Department", tab2);
-        }else{
+        } else {
             Main.setSelectedIndex(i);
         }
     }//GEN-LAST:event_BtnDepartmentMouseClicked
@@ -354,7 +353,7 @@ public class MainJframe extends javax.swing.JFrame {
             JInternalFrame fd = new JHumanResource();
             tab3.add(fd.getContentPane());
             Main.addTab("Humam Resource", tab3);
-        }else{
+        } else {
             Main.setSelectedIndex(i);
         }
     }//GEN-LAST:event_BtnHRMouseClicked
@@ -366,7 +365,7 @@ public class MainJframe extends javax.swing.JFrame {
             JInternalFrame fd = new JLogWork(this.us);
             tab4.add(fd.getContentPane());
             Main.addTab("Log Work", tab4);
-        }else{
+        } else {
             Main.setSelectedIndex(i);
         }
     }//GEN-LAST:event_BtnLogWorkMouseClicked
@@ -378,7 +377,7 @@ public class MainJframe extends javax.swing.JFrame {
             JInternalFrame fd = new JSalary(this.us);
             tab5.add(fd.getContentPane());
             Main.addTab("Salary", tab5);
-        }else{
+        } else {
             Main.setSelectedIndex(i);
         }
     }//GEN-LAST:event_BtnSalaryMouseClicked
@@ -390,7 +389,7 @@ public class MainJframe extends javax.swing.JFrame {
             JInternalFrame fd = new JExtend();
             tab6.add(fd.getContentPane());
             Main.addTab("Extends", tab6);
-        }else{
+        } else {
             Main.setSelectedIndex(i);
         }
     }//GEN-LAST:event_BtnExtendMouseClicked

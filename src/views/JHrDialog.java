@@ -5,37 +5,47 @@
  */
 package views;
 
+import entities.Department;
 import entities.User;
 import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import models.DepartmentDAO;
 import models.UserDAO;
 
 /**
  *
  * @author Queen
  */
-public class JProfile extends javax.swing.JInternalFrame {
+public class JHrDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form JProfile
-     */
     static User usr;
     static UserDAO _usr;
-    private MainJframe main;
+    static DepartmentDAO _dp;
+    static int user_id;
 
-    public JProfile(User usr, MainJframe main) {
-        initComponents();
-        this.setSize(this.getMaximumSize());
+    /**
+     * Creates new form JHrDialog
+     */
+    public JHrDialog(java.awt.Frame parent, boolean modal, User usr) {
+        super(parent, modal);
         this.usr = usr;
-        this.loadProfile();
-        this._usr = new UserDAO();
-        this.main = main;
+        _usr = new UserDAO();
+        _dp = new DepartmentDAO();
+        initComponents();
+        this.loadDepartment();
+        if (usr != null) {
+            loadProfie();
+            user_id = usr.getId();
+            BtnAddHr.setText("Cập nhật");
+        }
     }
 
     /**
@@ -47,9 +57,7 @@ public class JProfile extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Header = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
         Body1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         FirstName = new javax.swing.JTextField();
@@ -60,33 +68,20 @@ public class JProfile extends javax.swing.JInternalFrame {
         Email = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         Phone = new javax.swing.JTextField();
-        BtnUpdate = new javax.swing.JButton();
+        BtnAddHr = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         Address = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         IdentityCard = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        Department = new javax.swing.JComboBox();
         dob = new com.toedter.calendar.JDateChooser();
 
-        Header.setBackground(new java.awt.Color(204, 204, 204));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Thông tin tài khoản");
-
-        javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
-        Header.setLayout(HeaderLayout);
-        HeaderLayout.setHorizontalGroup(
-            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HeaderLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        HeaderLayout.setVerticalGroup(
-            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 16)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Thông tin nhân sự");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 3, 16)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -125,13 +120,13 @@ public class JProfile extends javax.swing.JInternalFrame {
         Phone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Phone.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(102, 153, 255), java.awt.Color.white));
 
-        BtnUpdate.setBackground(new java.awt.Color(102, 204, 255));
-        BtnUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        BtnUpdate.setText("Cập nhật");
-        BtnUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BtnUpdate.addActionListener(new java.awt.event.ActionListener() {
+        BtnAddHr.setBackground(new java.awt.Color(102, 204, 255));
+        BtnAddHr.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        BtnAddHr.setText("Thêm");
+        BtnAddHr.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnAddHr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnUpdateBtnUpdateActionPerformed(evt);
+                BtnAddHrActionPerformed(evt);
             }
         });
 
@@ -151,44 +146,55 @@ public class JProfile extends javax.swing.JInternalFrame {
         IdentityCard.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         IdentityCard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(102, 153, 255), java.awt.Color.white));
 
+        jLabel16.setFont(new java.awt.Font("Tahoma", 3, 16)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel16.setText("Department");
+
         javax.swing.GroupLayout Body1Layout = new javax.swing.GroupLayout(Body1);
         Body1.setLayout(Body1Layout);
         Body1Layout.setHorizontalGroup(
             Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Body1Layout.createSequentialGroup()
-                .addContainerGap(221, Short.MAX_VALUE)
-                .addGroup(Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Body1Layout.createSequentialGroup()
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(Body1Layout.createSequentialGroup()
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IdentityCard, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(Body1Layout.createSequentialGroup()
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(Address, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(Body1Layout.createSequentialGroup()
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(Phone, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(Body1Layout.createSequentialGroup()
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(Body1Layout.createSequentialGroup()
-                            .addGroup(Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(FirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(LastName, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(BtnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(222, Short.MAX_VALUE))
+                            .addComponent(IdentityCard, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Body1Layout.createSequentialGroup()
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Address, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Body1Layout.createSequentialGroup()
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Phone, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Body1Layout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Body1Layout.createSequentialGroup()
+                                .addGroup(Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(FirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LastName, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(BtnAddHr, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(Body1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Department, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         Body1Layout.setVerticalGroup(
             Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,57 +223,83 @@ public class JProfile extends javax.swing.JInternalFrame {
                 .addGroup(Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(IdentityCard, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
                 .addGroup(Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                     .addComponent(dob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(77, 77, 77)
-                .addComponent(BtnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addGroup(Body1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Department, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(145, 145, 145)
+                .addComponent(BtnAddHr, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
-
-        jScrollPane1.setViewportView(Body1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1182, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
+            .addComponent(Body1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Body1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnUpdateBtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateBtnUpdateActionPerformed
-        if (!validateUpdateProfile()) {
-            User u = new User();
-            u.setFirst_name(FirstName.getText());
-            u.setLast_name(LastName.getText());
-            u.setEmail(Email.getText());
-            u.setAddress(Address.getText());
-            u.setPhone_number(Phone.getText());
-            u.setIdentity_card(IdentityCard.getText());
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            u.setDob(format.format(dob.getDate()));
-            u.setId(this.usr.getId());
-            _usr.update(u);
-            this.usr = u;
-            JOptionPane.showConfirmDialog(null,
-                    "Cập nhật thành công!", "Profile", JOptionPane.DEFAULT_OPTION);
-            this.loadProfile();
-            main.setUser(this.usr);
+    private void BtnAddHrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddHrActionPerformed
+        if (BtnAddHr.getText().equals("Cập nhật")) {
+            if (!validateProfile()) {
+                User u = new User();
+                u.setId(user_id);
+                u.setFirst_name(FirstName.getText());
+                u.setLast_name(LastName.getText());
+                u.setEmail(Email.getText());
+                u.setAddress(Address.getText());
+                u.setPhone_number(Phone.getText());
+                u.setIdentity_card(IdentityCard.getText());
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                u.setDob(format.format(dob.getDate()));
+                Department dp = (Department) Department.getSelectedItem();
+                u.setDepartment_id(dp.getId());
+                _usr.update(u);
+                JOptionPane.showConfirmDialog(null,
+                        "Cập nhật thành công!", "Profile", JOptionPane.DEFAULT_OPTION);
+                dispose();
+            }
+        } else {
+            if (!validateProfile()) {
+                User u = new User();
+                u.setFirst_name(FirstName.getText());
+                u.setLast_name(LastName.getText());
+                u.setEmail(Email.getText());
+                u.setAddress(Address.getText());
+                u.setPhone_number(Phone.getText());
+                u.setIdentity_card(IdentityCard.getText());
+                u.setDob(dob.getDateFormatString());
+                Department dp = (Department) Department.getSelectedItem();
+                u.setDepartment_id(dp.getId());
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                u.setDob(format.format(dob.getDate()));  
+                Date date=java.util.Calendar.getInstance().getTime();  
+                u.setStart_date(format.format(date));
+                _usr.insert(u);
+                JOptionPane.showConfirmDialog(null,
+                        "Thêm thành công!", "Profile", JOptionPane.DEFAULT_OPTION);
+                dispose();
+            }
         }
-    }//GEN-LAST:event_BtnUpdateBtnUpdateActionPerformed
+    }//GEN-LAST:event_BtnAddHrActionPerformed
 
-    private boolean validateUpdateProfile() {
+    private boolean validateProfile() {
         StringBuilder errorText = new StringBuilder();
 
         if (FirstName.getText().length() == 0) {
@@ -295,7 +327,7 @@ public class JProfile extends javax.swing.JInternalFrame {
         }
     }
 
-    public void loadProfile() {
+    private void loadProfie() {
         try {
             FirstName.setText(this.usr.getFirst_name());
             LastName.setText(this.usr.getLast_name());
@@ -307,29 +339,78 @@ public class JProfile extends javax.swing.JInternalFrame {
             java.util.Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateValue);
             dob.setDate(date);
         } catch (ParseException ex) {
-            Logger.getLogger(JProfile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JHrDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void loadDepartment() {
+        DefaultComboBoxModel dp = (DefaultComboBoxModel) Department.getModel();
+        for (Department item : _dp.getAll()) {
+            dp.addElement(item);
+        }
+        Department.setModel(dp);
+    }
+    /**
+     * @param args the command line arguments
+     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(JHrDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(JHrDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(JHrDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(JHrDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                JHrDialog dialog = new JHrDialog(new javax.swing.JFrame(), true,User usr);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Address;
     private javax.swing.JPanel Body1;
-    private javax.swing.JButton BtnUpdate;
+    private javax.swing.JButton BtnAddHr;
+    private javax.swing.JComboBox Department;
     private javax.swing.JTextField Email;
     private javax.swing.JTextField FirstName;
-    private javax.swing.JPanel Header;
     private javax.swing.JTextField IdentityCard;
     private javax.swing.JTextField LastName;
     private javax.swing.JTextField Phone;
     private com.toedter.calendar.JDateChooser dob;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

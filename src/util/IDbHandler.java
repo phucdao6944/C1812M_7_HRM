@@ -18,4 +18,5 @@ public interface IDbHandler<T, Tkey> {
     void delete(Tkey id);
     List<T> getAll();
     T getById(Tkey id);
+    void update(T entity);
 }

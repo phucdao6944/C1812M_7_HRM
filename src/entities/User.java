@@ -21,11 +21,12 @@ public class User {
     private String identity_card;  
     private String start_date;  
     private String end_date;  
+    private int department_id;
 
     public User() {
     }
 
-    public User(int id, String first_name, String last_name, String email, String password, String phone_number, String address, String dob, String identity_card, String start_date, String end_date) {
+    public User(int id, String first_name, String last_name, String email, String password, String phone_number, String address, String dob, String identity_card, String start_date, String end_date, int department_id) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -37,6 +38,7 @@ public class User {
         this.identity_card = identity_card;
         this.start_date = start_date;
         this.end_date = end_date;
+        this.department_id = department_id;
     }
 
     public int getId() {
@@ -125,6 +127,14 @@ public class User {
 
     public void setEnd_date(String end_date) {
         this.end_date = end_date;
+    }
+
+    public int getDepartment_id() {
+        return department_id;
+    }
+
+    public void setDepartment_id(int department_id) {
+        this.department_id = department_id;
     }
     
     

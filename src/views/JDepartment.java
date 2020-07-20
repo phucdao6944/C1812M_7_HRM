@@ -5,18 +5,33 @@
  */
 package views;
 
+import entities.Department;
+import entities.User;
+import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JDialog;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import models.DepartmentDAO;
+import static views.JHumanResource.dp;
+
 /**
  *
  * @author Queen
  */
 public class JDepartment extends javax.swing.JInternalFrame {
 
+    static DepartmentDAO dp;
+
     /**
      * Creates new form JDepartment
      */
     public JDepartment() {
+        dp = new DepartmentDAO();
         initComponents();
         this.setSize(this.getMaximumSize());
+        loadTableDepartment();
     }
 
     /**
@@ -28,32 +43,157 @@ public class JDepartment extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        Header = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        DetailDepartment = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TblDepartment = new javax.swing.JTable();
+        BtnAddDp = new javax.swing.JButton();
 
-        jLabel1.setText("Department");
+        Header.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Phòng ban và vị trí");
+
+        javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
+        Header.setLayout(HeaderLayout);
+        HeaderLayout.setHorizontalGroup(
+            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HeaderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        HeaderLayout.setVerticalGroup(
+            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
+                .addGap(0, 9, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        TblDepartment.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        TblDepartment.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã phòng ban", "Tên phòng ban", "Mô tả chi tiết"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TblDepartment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TblDepartmentMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TblDepartment);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1088, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1582, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        DetailDepartment.setViewportView(jPanel1);
+
+        BtnAddDp.setBackground(new java.awt.Color(102, 204, 255));
+        BtnAddDp.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        BtnAddDp.setText("Thêm");
+        BtnAddDp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnAddDp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAddDpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(DetailDepartment, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(jLabel1)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(BtnAddDp, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jLabel1)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnAddDp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DetailDepartment, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnAddDpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddDpActionPerformed
+        JDialog d = new JDpDialog((Frame) null, true, null);
+        d.setLocationRelativeTo(null);
+        d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        d.pack();
+        d.setVisible(true);
+        d.addWindowListener(new WindowAdapter() {
+            public void windowClosed(WindowEvent e) {
+                loadTableDepartment();
+            }
+        });
+    }//GEN-LAST:event_BtnAddDpActionPerformed
 
+    private void TblDepartmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblDepartmentMouseClicked
+        if (evt.getClickCount() == 2) {
+            int rowIndex = TblDepartment.getSelectedRow();
+            int value = Integer.parseInt(TblDepartment.getModel().getValueAt(rowIndex, 0).toString());
+            Department d1 = dp.getById(value);
+            JDialog d = new JDpDialog((Frame) null, true, d1);
+            d.setLocationRelativeTo(null);
+            d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            d.pack();
+            d.setVisible(true);
+            d.addWindowListener(new WindowAdapter() {
+                public void windowClosed(WindowEvent e) {
+                    loadTableDepartment();
+                }
+            });
+        }
+    }//GEN-LAST:event_TblDepartmentMouseClicked
+
+    private void loadTableDepartment() {
+        DefaultTableModel models = (DefaultTableModel) TblDepartment.getModel();
+        models.setNumRows(0);
+        for (Department item : dp.getAll()) {
+            models.addRow(new Object[]{item.getId(), item.getName(), item.getDescription()});
+        }
+
+        TblDepartment.setModel(models);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton BtnAddDp;
+    private javax.swing.JScrollPane DetailDepartment;
+    private javax.swing.JPanel Header;
+    private javax.swing.JTable TblDepartment;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

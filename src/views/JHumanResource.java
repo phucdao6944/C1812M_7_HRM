@@ -5,17 +5,53 @@
  */
 package views;
 
+import entities.Department;
+import entities.User;
+import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTree;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import models.DepartmentDAO;
+import models.UserDAO;
+
 /**
  *
  * @author Queen
  */
 public class JHumanResource extends javax.swing.JInternalFrame {
 
+    static DepartmentDAO dp;
+    static UserDAO usr;
+    private JFrame frame;
+
     /**
      * Creates new form JHumanResource
      */
     public JHumanResource() {
+        dp = new DepartmentDAO();
+        usr = new UserDAO();
         initComponents();
+        loadTree();
+        DetailDepartment.setVisible(false);
+        this.frame = frame;
+    }
+
+    private void loadTree() {
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Hệ thống phòng ban");
+        for (Department d : dp.getAll()) {
+            root.add(new DefaultMutableTreeNode(d));
+        }
+
+        DefaultTreeModel models = new DefaultTreeModel(root);
+        TreeDepartment.setModel(models);
     }
 
     /**
@@ -27,32 +63,211 @@ public class JHumanResource extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Header = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        ListDepartment = new javax.swing.JScrollPane();
+        TreeDepartment = new javax.swing.JTree();
+        DetailDepartment = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TblHR = new javax.swing.JTable();
+        BtnAddHR = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        jLabel1.setText("HRM");
+        Header.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Quản lý nhân sự");
+
+        javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
+        Header.setLayout(HeaderLayout);
+        HeaderLayout.setHorizontalGroup(
+            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        HeaderLayout.setVerticalGroup(
+            HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        TreeDepartment.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TreeDepartment.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                TreeDepartmentValueChanged(evt);
+            }
+        });
+        ListDepartment.setViewportView(TreeDepartment);
+
+        DetailDepartment.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        TblHR.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        TblHR.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã nhân viên", "Họ tên", "Địa chỉ", "Số điện thoại", "CMND", "Email", "Ngày vào"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TblHR.setToolTipText("sdsds");
+        TblHR.setRowHeight(20);
+        TblHR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TblHRMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TblHR);
+
+        BtnAddHR.setBackground(new java.awt.Color(102, 204, 255));
+        BtnAddHR.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        BtnAddHR.setText("Thêm");
+        BtnAddHR.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnAddHR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAddHRActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Danh sách nhân sự");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(484, 484, 484)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(507, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BtnAddHR, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(BtnAddHR, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        DetailDepartment.setViewportView(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addComponent(jLabel1)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addComponent(ListDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DetailDepartment, javax.swing.GroupLayout.DEFAULT_SIZE, 1176, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel1)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ListDepartment, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+                    .addComponent(DetailDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void TreeDepartmentValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_TreeDepartmentValueChanged
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) TreeDepartment.getLastSelectedPathComponent();
+        Department d = (Department) node.getUserObject();
+        loadTableHR(d.getId());
+        DetailDepartment.setVisible(true);
+    }//GEN-LAST:event_TreeDepartmentValueChanged
+
+    private void BtnAddHRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddHRActionPerformed
+        JDialog d = new JHrDialog((Frame) null, true, null);
+        d.setLocationRelativeTo(null);
+        d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        d.pack();
+        d.setVisible(true);
+        d.addWindowListener(new WindowAdapter() {
+            public void windowClosed(WindowEvent e) {
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) TreeDepartment.getLastSelectedPathComponent();
+                Department d = (Department) node.getUserObject();
+                loadTableHR(d.getId());
+            }
+        });
+    }//GEN-LAST:event_BtnAddHRActionPerformed
+
+    private void TblHRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblHRMouseClicked
+        if (evt.getClickCount() == 2) {
+            int rowIndex = TblHR.getSelectedRow();
+            int value = Integer.parseInt(TblHR.getModel().getValueAt(rowIndex, 0).toString());
+            User u = usr.getById(value);
+            JDialog d = new JHrDialog((Frame) null, true, u);
+            d.setLocationRelativeTo(null);
+            d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            d.pack();
+            d.setVisible(true);
+            d.addWindowListener(new WindowAdapter() {
+                public void windowClosed(WindowEvent e) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) TreeDepartment.getLastSelectedPathComponent();
+                    Department d = (Department) node.getUserObject();
+                    loadTableHR(d.getId());
+                }
+            });
+        }
+    }//GEN-LAST:event_TblHRMouseClicked
+
+    private void loadTableHR(Integer id) {
+        DefaultTableModel models = (DefaultTableModel) TblHR.getModel();
+        models.setNumRows(0);
+        for (User item : usr.getByDepartment(id)) {
+            models.addRow(new Object[]{item.getId(), item.getLast_name() + " " + item.getFirst_name(), item.getAddress(), item.getPhone_number(), item.getIdentity_card(), item.getEmail(), item.getStart_date()});
+        }
+
+        TblHR.setModel(models);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAddHR;
+    private javax.swing.JScrollPane DetailDepartment;
+    private javax.swing.JPanel Header;
+    private javax.swing.JScrollPane ListDepartment;
+    private javax.swing.JTable TblHR;
+    private javax.swing.JTree TreeDepartment;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

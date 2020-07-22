@@ -6,10 +6,14 @@
 package views;
 
 import entities.Insurances;
+import entities.Subsidize;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.InsurancesDao;
+import models.SubsidizeDao;
 
 /**
  *
@@ -49,13 +53,25 @@ public class JExtend extends javax.swing.JInternalFrame {
         noteInsurance = new java.awt.TextField();
         jButton1 = new javax.swing.JButton();
         label4 = new java.awt.Label();
+        jDiaLogSubsidize = new javax.swing.JDialog();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        subsidizeTable = new javax.swing.JTable();
+        openCreateInsurance1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jDialogSubsidizeTable = new javax.swing.JDialog();
+        jPanel5 = new javax.swing.JPanel();
+        label5 = new java.awt.Label();
+        nameSubsizide = new java.awt.TextField();
+        label6 = new java.awt.Label();
+        amountSubsizide = new java.awt.TextField();
+        label7 = new java.awt.Label();
+        commentSubsizide = new java.awt.TextField();
+        jButton2 = new javax.swing.JButton();
+        label8 = new java.awt.Label();
         jPanel1 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
 
         insurancesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -235,6 +251,177 @@ public class JExtend extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        subsidizeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Mức trợ cấp", "Giá tiền", "Ghi chú"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        subsidizeTable.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                subsidizeTablePropertyChange(evt);
+            }
+        });
+        jScrollPane3.setViewportView(subsidizeTable);
+
+        openCreateInsurance1.setText("Thêm mới");
+        openCreateInsurance1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openCreateInsurance1ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Xóa");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(openCreateInsurance1))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(openCreateInsurance1)
+                    .addComponent(jButton5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDiaLogSubsidizeLayout = new javax.swing.GroupLayout(jDiaLogSubsidize.getContentPane());
+        jDiaLogSubsidize.getContentPane().setLayout(jDiaLogSubsidizeLayout);
+        jDiaLogSubsidizeLayout.setHorizontalGroup(
+            jDiaLogSubsidizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDiaLogSubsidizeLayout.setVerticalGroup(
+            jDiaLogSubsidizeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel5.setToolTipText("");
+        jPanel5.setName(""); // NOI18N
+
+        label5.setText("Mức trợ cấp");
+
+        nameSubsizide.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        nameSubsizide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameSubsizideActionPerformed(evt);
+            }
+        });
+
+        label6.setText("Giá:");
+
+        amountSubsizide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amountSubsizideActionPerformed(evt);
+            }
+        });
+
+        label7.setText("Ghi chú:");
+
+        commentSubsizide.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        jButton2.setText("Thêm");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        label8.setAlignment(java.awt.Label.CENTER);
+        label8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        label8.setName(""); // NOI18N
+        label8.setText("Thêm mới trợ cấp");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(commentSubsizide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(amountSubsizide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nameSubsizide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
+                .addContainerGap())
+            .addComponent(label8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nameSubsizide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(amountSubsizide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(commentSubsizide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(81, 81, 81))
+        );
+
+        javax.swing.GroupLayout jDialogSubsidizeTableLayout = new javax.swing.GroupLayout(jDialogSubsidizeTable.getContentPane());
+        jDialogSubsidizeTable.getContentPane().setLayout(jDialogSubsidizeTableLayout);
+        jDialogSubsidizeTableLayout.setHorizontalGroup(
+            jDialogSubsidizeTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialogSubsidizeTableLayout.setVerticalGroup(
+            jDialogSubsidizeTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogSubsidizeTableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         jButton7.setBackground(new java.awt.Color(102, 255, 255));
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton7.setForeground(new java.awt.Color(51, 51, 51));
@@ -249,13 +436,9 @@ public class JExtend extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton9.setBackground(new java.awt.Color(102, 255, 255));
-        jButton9.setText("jButton7");
-        jButton9.setBorder(null);
-        jButton9.setBorderPainted(false);
-
         jButton13.setBackground(new java.awt.Color(102, 255, 255));
-        jButton13.setText("jButton7");
+        jButton13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton13.setText("Trợ cấp");
         jButton13.setBorder(null);
         jButton13.setBorderPainted(false);
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -270,100 +453,61 @@ public class JExtend extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 385, Short.MAX_VALUE)
+                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 106, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
-
-        jButton8.setBackground(new java.awt.Color(102, 255, 255));
-        jButton8.setText("jButton7");
-        jButton8.setBorder(null);
-        jButton8.setBorderPainted(false);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setBackground(new java.awt.Color(102, 255, 255));
-        jButton10.setText("jButton7");
-        jButton10.setBorder(null);
-        jButton10.setBorderPainted(false);
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
-        jButton11.setBackground(new java.awt.Color(102, 255, 255));
-        jButton11.setText("jButton7");
-        jButton11.setBorder(null);
-        jButton11.setBorderPainted(false);
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
-
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
+        jDiaLogSubsidize.setSize(600, 600);
+        jDiaLogSubsidize.setVisible(true);
+        listSubsidize();
     }//GEN-LAST:event_jButton13ActionPerformed
-
+    
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         jDialog1.setSize(600, 600);
         jDialog1.setVisible(true);
         listTableInsurance();
     }//GEN-LAST:event_jButton7ActionPerformed
+    
+    private void listSubsidize(){
+        DefaultTableModel model = (DefaultTableModel) subsidizeTable.getModel();
+        model.setRowCount(0);
+        List<Subsidize> subsidizes = new ArrayList<Subsidize>();
+        SubsidizeDao ssd = new SubsidizeDao();
+        subsidizes = ssd.getAll();
+        subsidizes.forEach(subsidize -> {
+            model.addRow(new Object[]{
+                subsidize.getId(),
+                subsidize.getLevel(),
+                subsidize.getAmount(),
+                subsidize.getComment()
+            });
+        });
+    }
     
     private void listTableInsurance(){
         DefaultTableModel model = (DefaultTableModel) insurancesTable.getModel();
@@ -413,7 +557,7 @@ public class JExtend extends javax.swing.JInternalFrame {
                 issDao.update(ins);
                 listTableInsurance();
             }else{
-                System.out.println("gà");
+                JOptionPane.showMessageDialog(jPanel2, "Giá không hợp lệ");
             }
 
         }
@@ -426,11 +570,11 @@ public class JExtend extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         InsurancesDao issDao = new InsurancesDao();
         if (nameInsurance.getText().toString().length() <= 0) {
-            System.out.println("Phải nhập tên bảo hiểm");
+            JOptionPane.showMessageDialog(jPanel3, "Phải nhập tên bảo hiểm");
         }else if(amountInsurance .getText().toString().length() <= 0){
-            System.out.println("Phải nhập giá");
+            JOptionPane.showMessageDialog(jPanel3, "Phải nhập giá");
         }else if(!checkDouble(amountInsurance .getText().toString())){
-            System.out.println("Giá không hợp lệ");
+            JOptionPane.showMessageDialog(jPanel3, "Giá không hợp lệ");
         }else{
             Insurances ins = new Insurances();
             ins.setName(nameInsurance.getText().toString());
@@ -440,8 +584,105 @@ public class JExtend extends javax.swing.JInternalFrame {
             }
             issDao.insert(ins);
             listTableInsurance();
+            JOptionPane.showMessageDialog(jPanel3, "Thêm thành công");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void subsidizeTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_subsidizeTablePropertyChange
+        SubsidizeDao ssd = new SubsidizeDao();
+        DefaultTableModel model = (DefaultTableModel) subsidizeTable.getModel();
+        if (evt.getOldValue() != null && (evt.getOldValue().toString().contains("JTable$NumberEditor") || evt.getOldValue().toString().contains("JTable$GenericEditor"))) {
+            int selectedRowIndex = subsidizeTable.getSelectedRow();
+            String amount = model.getValueAt(selectedRowIndex, 2).toString();
+            String levelte = model.getValueAt(selectedRowIndex, 1).toString();
+            if (!checkDouble(amount)) {
+                JOptionPane.showMessageDialog(jPanel2, "Giá không hợp lệ");
+            }else if(!isStringInt(levelte)){
+                JOptionPane.showMessageDialog(jPanel2, "Mức trợ cấp không hợp lệ");
+            } else {
+                
+                Subsidize sub = new Subsidize();
+                Subsidize sub2 = new Subsidize();
+                int id = (int) model.getValueAt(selectedRowIndex, 0);
+                int level = Integer.parseInt(model.getValueAt(selectedRowIndex, 1).toString());
+                if (ssd.getByLevel(level) != null) {
+                    sub2 = ssd.getByLevel(level);
+                    if (sub2.getId() != id) {
+                        JOptionPane.showMessageDialog(jPanel5, "Mức trợ cấp đã tồn tại");
+                    } else {
+                        sub.setLevel(level);
+                        System.out.println(level);
+                        sub.setAmount((double) model.getValueAt(selectedRowIndex, 2));
+                        sub.setComment(model.getValueAt(selectedRowIndex, 3).toString());
+                        sub.setId((int) model.getValueAt(selectedRowIndex, 0));
+                        ssd.update(sub);
+                        
+                    }
+                }else{
+                    sub.setLevel(level);
+                    System.out.println(level);
+                    sub.setAmount((double) model.getValueAt(selectedRowIndex, 2));
+                    sub.setComment(model.getValueAt(selectedRowIndex, 3).toString());
+                    sub.setId((int) model.getValueAt(selectedRowIndex, 0));
+                    ssd.update(sub);
+                }
+                
+            }
+            listSubsidize();
+        }
+    }//GEN-LAST:event_subsidizeTablePropertyChange
+
+    private void openCreateInsurance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openCreateInsurance1ActionPerformed
+        jDialogSubsidizeTable.setSize(500, 500);
+        jDialogSubsidizeTable.setVisible(true);
+        jDialogSubsidizeTable.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_openCreateInsurance1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        SubsidizeDao ssd = new SubsidizeDao();
+        DefaultTableModel model = (DefaultTableModel) subsidizeTable.getModel();
+        int selectedRowIndex = subsidizeTable.getSelectedRow();
+        ssd.delete((int) model.getValueAt(selectedRowIndex, 0));
+        listSubsidize();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void nameSubsizideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameSubsizideActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameSubsizideActionPerformed
+
+    private void amountSubsizideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountSubsizideActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_amountSubsizideActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        SubsidizeDao ssd = new SubsidizeDao();
+        if (nameSubsizide.getText().toString().length() <= 0) {
+            JOptionPane.showMessageDialog(jPanel5, "Phải nhập mức trợ cấp");
+        }else if(!isStringInt(nameSubsizide .getText().toString())){
+            JOptionPane.showMessageDialog(jPanel5, "Mức trợ cấp phải là số nguyên dương");
+        }else if(amountSubsizide .getText().toString().length() <= 0){
+            JOptionPane.showMessageDialog(jPanel5, "Phải nhập giá");
+        }else if(!checkDouble(amountSubsizide .getText().toString())){
+            JOptionPane.showMessageDialog(jPanel5, "Giá không hợp lệ");
+        }else if(commentSubsizide .getText().toString().length() <= 0){
+            JOptionPane.showMessageDialog(jPanel5, "Phải nhập ghi chú về trợ cấp");
+        }else{
+            int level = Integer.parseInt(nameSubsizide.getText().toString());
+            if (ssd.getByLevel(level) != null) {
+                JOptionPane.showMessageDialog(jPanel5, "Mức trợ cấp đã tồn tại");
+            } else {
+                Subsidize sub = new Subsidize();
+                sub.setLevel(Integer.parseInt(nameSubsizide.getText().toString()));
+                sub.setAmount(Double.parseDouble(amountSubsizide.getText().toString()));
+                if (commentSubsizide.getText().toString().length() > 0) {
+                    sub.setComment(commentSubsizide.getText().toString());
+                }
+                ssd.insert(sub);
+                listSubsidize();
+                JOptionPane.showMessageDialog(jPanel3, "Thêm thành công");
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public boolean checkFloat(String value) {
         try {
@@ -460,30 +701,50 @@ public class JExtend extends javax.swing.JInternalFrame {
             return false;
         }
     }
-
+    
+    public boolean isStringInt(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.TextField amountInsurance;
+    private java.awt.TextField amountSubsizide;
+    private java.awt.TextField commentSubsizide;
     private javax.swing.JTable insurancesTable;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JDialog jDiaLogCreateInsurances;
+    private javax.swing.JDialog jDiaLogSubsidize;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialogSubsidizeTable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;
+    private java.awt.Label label5;
+    private java.awt.Label label6;
+    private java.awt.Label label7;
+    private java.awt.Label label8;
     private java.awt.TextField nameInsurance;
+    private java.awt.TextField nameSubsizide;
     private java.awt.TextField noteInsurance;
     private javax.swing.JButton openCreateInsurance;
+    private javax.swing.JButton openCreateInsurance1;
+    private javax.swing.JTable subsidizeTable;
     // End of variables declaration//GEN-END:variables
 }

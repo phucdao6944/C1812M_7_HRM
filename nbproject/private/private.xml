@@ -4,11 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/E:/C1812M_7_HRM/src/models/InsurancesDao.java</file>
-            <file>file:/E:/C1812M_7_HRM/src/entities/Insurances.java</file>
-            <file>file:/E:/C1812M_7_HRM/src/views/FormLogin.java</file>
-            <file>file:/E:/C1812M_7_HRM/src/views/JLogWork.java</file>
-            <file>file:/E:/C1812M_7_HRM/src/views/JSalary.java</file>
-            <file>file:/E:/C1812M_7_HRM/src/views/JExtend.java</file>
+            <file>file:/E:/C1812M_7_HRM/src/views/JProfile.java</file>
+            <file>file:/E:/C1812M_7_HRM/src/models/UserDAO.java</file>
+            <file>file:/E:/C1812M_7_HRM/src/views/JHrDialog.java</file>
+            <file>file:/E:/C1812M_7_HRM/src/models/LogWorkDao.java</file>
+            <file>file:/E:/C1812M_7_HRM/src/util/IDbHandler.java</file>
             <file>file:/E:/C1812M_7_HRM/src/models/SalaryDao.java</file>
         </group>
     </open-files>
